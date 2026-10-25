@@ -4,20 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vinculando con MixPOS...</title>
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-dark: #090d16;
-            --card-bg: #111827;
-            --border-color: #1f2937;
-            --primary: #0284c7;
-            --primary-hover: #0369a1;
+            /* Paleta Oficial MixPOS (Dark Zinc + Naranja Marca) */
+            --bg-dark: #09090b;
+            --card-bg: #141721;
+            --card-border: rgba(255, 255, 255, 0.08);
+            --mixpos-orange: #FF6B00;
+            --mixpos-orange-hover: #FF8533;
+            --mixpos-orange-active: #E65100;
+            --mixpos-orange-soft: rgba(255, 107, 0, 0.12);
+            --mixpos-orange-border: rgba(255, 107, 0, 0.28);
+            --mp-blue: #009EE3;
+            --mp-blue-soft: rgba(0, 158, 227, 0.12);
             --success: #10b981;
             --danger: #ef4444;
-            --text-main: #f9fafb;
-            --text-muted: #9ca3af;
+            --text-main: #f4f4f5;
+            --text-muted: #a1a1aa;
         }
 
         * {
@@ -34,158 +41,277 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 24px;
             background-image: 
-                radial-gradient(circle at 50% 20%, rgba(2, 132, 199, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%);
+                radial-gradient(circle at 50% 15%, rgba(255, 107, 0, 0.18) 0%, transparent 60%),
+                radial-gradient(circle at 85% 85%, rgba(0, 158, 227, 0.10) 0%, transparent 50%),
+                radial-gradient(circle at 15% 90%, rgba(16, 185, 129, 0.06) 0%, transparent 45%);
+            background-attachment: fixed;
         }
 
         .card {
             background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 40px 32px;
-            max-width: 460px;
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            padding: 44px 36px 36px;
+            max-width: 480px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
-            animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 
+                0 25px 60px -15px rgba(0, 0, 0, 0.75), 
+                0 0 40px -10px rgba(255, 107, 0, 0.15),
+                0 0 0 1px rgba(255, 255, 255, 0.04);
+            animation: fadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Línea de acento naranja sutil superior */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 15%;
+            right: 15%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--mixpos-orange), transparent);
+            opacity: 0.8;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(16px) scale(0.98); }
+            from { opacity: 0; transform: translateY(18px) scale(0.97); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
+        /* Co-Branding Header */
+        .brand-header {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 8px 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 9999px;
+            margin-bottom: 28px;
+        }
+
+        .brand-logo-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-logo-img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 6px rgba(255, 107, 0, 0.4));
+        }
+
+        .brand-text {
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+        }
+
+        .brand-text-accent {
+            color: var(--mixpos-orange);
+        }
+
+        .brand-divider {
+            color: #4b5563;
+            display: flex;
+            align-items: center;
+        }
+
+        .mp-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: #38bdf8;
+        }
+
+        .mp-badge svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Icon Container */
         .icon-container {
-            width: 72px;
-            height: 72px;
+            width: 80px;
+            height: 80px;
             margin: 0 auto 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(2, 132, 199, 0.15);
-            border: 2px solid rgba(2, 132, 199, 0.3);
+            background: var(--mixpos-orange-soft);
+            border: 2px solid var(--mixpos-orange-border);
             position: relative;
+            box-shadow: 0 0 25px rgba(255, 107, 0, 0.15);
+            transition: all 0.3s ease;
         }
 
         .icon-container.success {
             background: rgba(16, 185, 129, 0.15);
-            border-color: rgba(16, 185, 129, 0.4);
+            border-color: rgba(16, 185, 129, 0.45);
             color: var(--success);
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.2);
         }
 
         .icon-container.error {
             background: rgba(239, 68, 68, 0.15);
-            border-color: rgba(239, 68, 68, 0.4);
+            border-color: rgba(239, 68, 68, 0.45);
             color: var(--danger);
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.2);
         }
 
         .spinner {
-            width: 40px;
-            height: 40px;
-            border: 3px solid rgba(255, 255, 255, 0.1);
-            border-top-color: var(--primary);
+            width: 44px;
+            height: 44px;
+            border: 3.5px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--mixpos-orange);
             border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+            animation: spin 0.85s linear infinite;
         }
 
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
 
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 5px 13px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .badge-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--mixpos-orange);
+            box-shadow: 0 0 8px var(--mixpos-orange);
+            animation: pulse 1.6s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.85); }
+        }
+
         h1 {
             font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            letter-spacing: -0.02em;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 12px;
+            letter-spacing: -0.025em;
+            line-height: 1.3;
         }
 
         p {
             font-size: 14px;
             color: var(--text-muted);
-            line-height: 1.5;
-            margin-bottom: 24px;
+            line-height: 1.6;
+            margin-bottom: 28px;
         }
 
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 14px;
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 9999px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #94a3b8;
-            margin-bottom: 20px;
-        }
-
-        .badge-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--success);
-            box-shadow: 0 0 8px var(--success);
-        }
-
+        /* Botón de Acción con Naranja MixPOS */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
             width: 100%;
-            padding: 13px 20px;
-            background: var(--primary);
+            padding: 14px 22px;
+            background: linear-gradient(135deg, var(--mixpos-orange) 0%, var(--mixpos-orange-active) 100%);
             color: #ffffff;
             font-size: 15px;
-            font-weight: 600;
-            border-radius: 12px;
+            font-weight: 700;
+            border-radius: 14px;
             text-decoration: none;
             border: none;
             cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.38);
         }
 
         .btn:hover {
-            background: var(--primary-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.6);
+            background: linear-gradient(135deg, var(--mixpos-orange-hover) 0%, var(--mixpos-orange) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 26px rgba(255, 107, 0, 0.55);
+        }
+
+        .btn:active {
+            transform: translateY(0);
         }
 
         .footer-note {
-            margin-top: 20px;
+            margin-top: 22px;
             font-size: 12px;
-            color: #64748b;
+            color: #71717a;
+            line-height: 1.4;
         }
     </style>
 </head>
 <body>
 
     <div class="card" id="card">
+        <!-- Encabezado con Logotipo Oficial MixPOS y Mercado Pago -->
+        <div class="brand-header">
+            <div class="brand-logo-group">
+                <img src="../assets/logo.png" alt="Logo MixPOS" class="brand-logo-img">
+                <span class="brand-text">Mix<span class="brand-text-accent">POS</span></span>
+            </div>
+            <div class="brand-divider">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14"></path>
+                    <path d="M13 6l6 6-6 6"></path>
+                </svg>
+            </div>
+            <div class="mp-badge">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+                <span>Mercado Pago Point</span>
+            </div>
+        </div>
+
+        <!-- Contenedor del Icono / Spinner -->
         <div class="icon-container" id="icon-box">
             <div class="spinner" id="spinner"></div>
-            <svg id="icon-success" style="display:none; width:36px; height:36px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+            <svg id="icon-success" style="display:none; width:40px; height:40px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 13l4 4L19 7"></path>
             </svg>
-            <svg id="icon-error" style="display:none; width:36px; height:36px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path>
+            <svg id="icon-error" style="display:none; width:40px; height:40px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </div>
 
-        <div class="badge">
+        <!-- Estado de la Operación -->
+        <div class="status-badge">
             <span class="badge-dot" id="badge-dot"></span>
-            <span id="badge-text">Mercado Pago Point</span>
+            <span id="badge-text">Vinculación en curso</span>
         </div>
 
         <h1 id="title">Conectando con MixPOS...</h1>
-        <p id="description">Estamos transfiriendo la autorización a tu punto de venta. Por favor espera un momento.</p>
+        <p id="description">Estamos transfiriendo la autorización de Mercado Pago a tu punto de venta. Por favor espera un momento.</p>
 
         <a id="btn-action" href="#" class="btn" style="display:none;">Volver a MixPOS</a>
 
-        <div class="footer-note" id="footer-note">Si esta ventana no se cierra automáticamente, puedes hacer clic arriba.</div>
+        <div class="footer-note" id="footer-note">Si esta ventana no se cierra automáticamente, puedes hacer clic en el botón de arriba.</div>
     </div>
 
     <script>
@@ -214,9 +340,10 @@
                 iconError.style.display = 'block';
                 badgeDot.style.background = 'var(--danger)';
                 badgeDot.style.boxShadow = '0 0 8px var(--danger)';
+                badgeDot.style.animation = 'none';
                 badgeText.innerText = 'Autorización cancelada';
                 title.innerText = 'No se completó la vinculación';
-                desc.innerText = errorDesc || 'La autorización fue denegada o expiró. Puedes intentarlo de nuevo desde MixPOS.';
+                desc.innerText = errorDesc || 'La autorización fue cancelada o expiró. Puedes intentarlo nuevamente desde la sección de Terminales en MixPOS.';
                 btn.href = localTarget;
                 btn.innerText = 'Cerrar y Regresar a MixPOS';
                 btn.style.display = 'inline-flex';
@@ -228,24 +355,31 @@
                 spinner.style.display = 'none';
                 iconBox.classList.add('success');
                 iconSuccess.style.display = 'block';
+                badgeDot.style.background = 'var(--success)';
+                badgeDot.style.boxShadow = '0 0 8px var(--success)';
+                badgeDot.style.animation = 'none';
                 badgeText.innerText = 'Autorización exitosa';
                 title.innerText = '¡Cuenta vinculada con éxito!';
-                desc.innerText = 'Guardando tus terminales Point en MixPOS... Ya puedes cerrar esta ventana.';
+                desc.innerText = 'MixPOS está configurando tus terminales Point en este momento... Ya puedes cerrar esta ventana.';
                 btn.href = localTarget;
                 btn.innerText = 'Abrir MixPOS';
                 btn.style.display = 'inline-flex';
 
-                // Redirección inmediata al puerto local de MixPOS
+                // Redirección inmediata al listener local de MixPOS
                 setTimeout(() => {
                     window.location.replace(localTarget);
                 }, 400);
             } else {
-                // Sin parámetros
+                // Sin parámetros (acceso directo sin OAuth)
                 spinner.style.display = 'none';
                 iconBox.classList.add('error');
                 iconError.style.display = 'block';
-                title.innerText = 'Parámetros no encontrados';
-                desc.innerText = 'Esta página es el puente de autorización entre Mercado Pago y MixPOS. Inicia el proceso desde la aplicación.';
+                badgeDot.style.background = 'var(--danger)';
+                badgeDot.style.boxShadow = '0 0 8px var(--danger)';
+                badgeDot.style.animation = 'none';
+                badgeText.innerText = 'Acceso directo';
+                title.innerText = 'Puente OAuth MixPOS';
+                desc.innerText = 'Esta página es el puente de enlace seguro entre Mercado Pago y tu aplicación MixPOS. Inicia la vinculación directamente desde MixPOS.';
             }
         })();
     </script>
